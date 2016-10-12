@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "RNBoilerplate.app"
-               BlueprintName = "RNBoilerplate"
-               ReferencedContainer = "container:RNBoilerplate.xcodeproj">
+               BuildableName = "sfusat.app"
+               BlueprintName = "sfusat"
+               ReferencedContainer = "container:sfusat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RNBoilerplateTests.xctest"
-               BlueprintName = "RNBoilerplateTests"
-               ReferencedContainer = "container:RNBoilerplate.xcodeproj">
+               BuildableName = "sfusatTests.xctest"
+               BlueprintName = "sfusatTests"
+               ReferencedContainer = "container:sfusat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RNBoilerplateTests.xctest"
-               BlueprintName = "RNBoilerplateTests"
-               ReferencedContainer = "container:RNBoilerplate.xcodeproj">
+               BuildableName = "sfusatTests.xctest"
+               BlueprintName = "sfusatTests"
+               ReferencedContainer = "container:sfusat.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RNBoilerplate.app"
-            BlueprintName = "RNBoilerplate"
-            ReferencedContainer = "container:RNBoilerplate.xcodeproj">
+            BuildableName = "sfusat.app"
+            BlueprintName = "sfusat"
+            ReferencedContainer = "container:sfusat.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RNBoilerplate.app"
-            BlueprintName = "RNBoilerplate"
-            ReferencedContainer = "container:RNBoilerplate.xcodeproj">
+            BuildableName = "sfusat.app"
+            BlueprintName = "sfusat"
+            ReferencedContainer = "container:sfusat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RNBoilerplate.app"
-            BlueprintName = "RNBoilerplate"
-            ReferencedContainer = "container:RNBoilerplate.xcodeproj">
+            BuildableName = "sfusat.app"
+            BlueprintName = "sfusat"
+            ReferencedContainer = "container:sfusat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

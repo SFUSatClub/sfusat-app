@@ -6,10 +6,10 @@ import configureStore from './configureStore';
 
 const store = configureStore();
 
-const RNBoilerplate = () => (
+const SFUSat = () => (
   <Provider store={store}>
     <Router />
   </Provider>
 );
 
-AppRegistry.registerComponent('RNBoilerplate', () => RNBoilerplate);
+AppRegistry.registerComponent('sfusat', () => SFUSat);

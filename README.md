@@ -40,7 +40,7 @@ Run command to open iOS simulator and run app:
 $ npm run ios
 ```
 
-Or open `ios/RNBoilerplate.xcodeproj` file with XCode:
+Or open `ios/sfusat.xcodeproj` file with XCode:
 
 ```bash
 $ npm run ios-open

@@ -1,4 +1,4 @@
-package com.rnboilerplate;
+package com.sfusat;
 
 import android.app.Application;
 import android.util.Log;
