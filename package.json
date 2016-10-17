@@ -12,8 +12,10 @@
   "dependencies": {
     "immutable": "^3.7.6",
     "lodash": "^4.3.0",
+    "native-base": "^0.5.9",
     "react": "~15.3.2",
     "react-native": "^0.35.0",
+    "react-native-drawer": "^2.3.0",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1"

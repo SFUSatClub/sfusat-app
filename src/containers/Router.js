@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { NavigationExperimental } from 'react-native';
+import { NavigationExperimental, Navigator, View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 
 import Home from './Home';
 import Counter from './Counter';
+import darkTheme from '../themes/dark.js'
 
 const { CardStack } = NavigationExperimental;
 
@@ -34,11 +35,18 @@ export default class Router extends Component {
 
   render() {
     return (
-      <CardStack
-        direction="horizontal"
-        navigationState={this.props.routes}
-        renderScene={this.renderScene}
-      />
+      <View style={{flex:1}}>
+        <StatusBar
+          backgroundColor={darkTheme.statusBarColor}
+          barStyle="light-content"
+          animated={true}
+        />
+        <CardStack
+          direction="vertical"
+          navigationState={this.props.routes}
+          renderScene={this.renderScene}
+        />
+      </View>
     );
   }
 }
