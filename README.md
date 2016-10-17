@@ -1,11 +1,12 @@
 # SFUSat Mobile App
 
+![demo](http://i.imgur.com/vZs5zuh.gif)
+
 ## Included
 
 * [React](https://github.com/facebook/react) & [React Native](https://github.com/facebook/react-native)
 * [Redux](https://github.com/reactjs/redux) & [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools) & [On Debugger](https://github.com/jhen0409/remote-redux-devtools-on-debugger)
 * [Immutable](https://github.com/facebook/immutable-js) & [Immutable DevTools](https://github.com/andrewdavey/immutable-devtools)
-* [Babel](https://github.com/babel/babel) & Plugins: [transform-decorators-legacy](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy)
 
 ## Installation
 
@@ -32,7 +33,7 @@ Open Android emulator and run command: (Or connect real device via USB)
 $ npm run android
 ```
 
-#### iOS
+#### iOS (untested)
 
 Run command to open iOS simulator and run app:
 
@@ -45,6 +46,14 @@ Or open `ios/sfusat.xcodeproj` file with XCode:
 ```bash
 $ npm run ios-open
 ```
+
+#### App Dev Mode
+
+- Shake the device and...
+	- Enable dev mode
+	- Enable live reload
+	- Enable hot reloading
+	- Setup debug server host & port (use wifi to send bundles to device so device doesn't need to be plugged in)
 
 ## Credits
 
