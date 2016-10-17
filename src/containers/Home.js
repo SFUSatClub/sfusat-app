@@ -1,52 +1,43 @@
 import React, { Component, PropTypes } from 'react';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base';
-import Drawer from 'react-native-drawer'
-import darkTheme from '../themes/dark.js'
-
 import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableOpacity
 } from 'react-native';
 
+import CustomTabBar from '../components/CustomTabBar';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base';
+import darkTheme from '../themes/dark.js'
+
 const styles = StyleSheet.create({
-  container: {
+  tabView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#1E1E1E',
+    padding: 10,
+    backgroundColor: 'rgba(0,0,0,0.01)',
   },
-  welcome: {
-    fontSize: 30,
-    textAlign: 'center',
-    color: '#FEFEFE',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#FEFEFE',
-    marginBottom: 5,
+  card: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: 'rgba(0,0,0,0.1)',
+    margin: 5,
+    height: 150,
+    padding: 15,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 2, height: 2, },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
   },
 });
-
-var drawerStyles = {
-  drawer: { 
-    shadowColor: '#000000', shadowOpacity: 0.3, shadowRadius: 15,
-  },
-}
 
 export default class Home extends Component {
   static propTypes = {
     navigate: PropTypes.func.isRequired
   };
 
-  closeControlPanel = () => {
-    this._drawer.close()
-  };
-  openDrawer = () => {
-    this._drawer.open()
-  };
   toCounter = () => {
     const { navigate } = this.props;
     navigate({
@@ -57,54 +48,40 @@ export default class Home extends Component {
 
   render() {
     return (
-      <Drawer
-        type="overlay"
-        content={
-          <View style={styles.container}>
-            <Text style={styles.welcome}>
-              Fraser Space Systems
-            </Text>
-            <TouchableOpacity onPress={this.toCounter}>
-              <Text style={styles.instructions}>click here lol</Text>
-            </TouchableOpacity>
-          </View>
-        }
-        tapToClose={true}
-        openDrawerOffset={0.2}
-        panOpenMask={0.1}
-        panCloseMask={0.2}
-        panThreshold={0.1}
-        styles={drawerStyles}
-        tweenHandler={(ratio) => ({
-          main: { opacity:(2-ratio)/2 }
-        })}
-        tweenEasing="easeInOutSine"
-        // use tweenEasing="easeOutQuart" for dragging instead, smoother
-        ref={(ref) => this._drawer = ref}
-        elevation={4}
+      <ScrollableTabView
+        style={{marginTop: 10, }}
+        initialPage={0}
+        renderTabBar={() => <CustomTabBar underlineStyle={{height:3}}/>}
       >
-        <Container style={styles.container} theme={darkTheme}> 
-          <Header>
-            <Button transparent onPress={this.openDrawer}>
-              <Icon name='md-menu' />
-            </Button>
-
-            <Title>News</Title>
-
-          </Header>
-
-          <Content>
-            <Text style={styles.welcome}>
-              Fraser Space Systems
-            </Text>
+        <ScrollView tabLabel="ios-paper" style={styles.tabView}>
+          <Content style={styles.card}>
+            <Text style={styles.welcome}>Fraser Space Systems News</Text>
             <TouchableOpacity onPress={this.toCounter}>
-              <Text style={styles.instructions}>click here lol</Text>
+              <Text style={styles.instructions}></Text>
             </TouchableOpacity>
           </Content>
-
-        </Container>
-      </Drawer>
-      
+        </ScrollView>
+        <ScrollView tabLabel="md-planet" style={styles.tabView}>
+          <View style={styles.card}>
+            <Text>Live data</Text>
+          </View>
+        </ScrollView>
+        <ScrollView tabLabel="md-school" style={styles.tabView}>
+          <View style={styles.card}>
+            <Text>Learning</Text>
+          </View>
+        </ScrollView>
+        <ScrollView tabLabel="md-notifications" style={styles.tabView}>
+          <View style={styles.card}>
+            <Text>Notifications</Text>
+          </View>
+        </ScrollView>
+        <ScrollView tabLabel="md-settings" style={styles.tabView}>
+          <View style={styles.card}>
+            <Text>Settings</Text>
+          </View>
+        </ScrollView>
+      </ScrollableTabView>
     );
   }
 }
