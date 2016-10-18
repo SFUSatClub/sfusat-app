@@ -7,8 +7,13 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import CustomTabBar from '../components/CustomTabBar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import CustomTabBar from '../components/CustomTabBar';
+import NewsTab from '../containers/NewsTab';
+import TelemetryTab from '../containers/TelemetryTab';
+import LearningTab from '../containers/LearningTab';
+import NotificationsTab from '../containers/NotificationsTab';
+import SettingsTab from '../containers/SettingsTab';
 
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base';
 import darkTheme from '../themes/dark.js'
@@ -53,34 +58,11 @@ export default class Home extends Component {
         initialPage={0}
         renderTabBar={() => <CustomTabBar underlineStyle={{height:3}}/>}
       >
-        <ScrollView tabLabel="ios-paper" style={styles.tabView}>
-          <Content style={styles.card}>
-            <Text style={styles.welcome}>Fraser Space Systems News</Text>
-            <TouchableOpacity onPress={this.toCounter}>
-              <Text style={styles.instructions}></Text>
-            </TouchableOpacity>
-          </Content>
-        </ScrollView>
-        <ScrollView tabLabel="md-planet" style={styles.tabView}>
-          <View style={styles.card}>
-            <Text>Live data</Text>
-          </View>
-        </ScrollView>
-        <ScrollView tabLabel="md-school" style={styles.tabView}>
-          <View style={styles.card}>
-            <Text>Learning</Text>
-          </View>
-        </ScrollView>
-        <ScrollView tabLabel="md-notifications" style={styles.tabView}>
-          <View style={styles.card}>
-            <Text>Notifications</Text>
-          </View>
-        </ScrollView>
-        <ScrollView tabLabel="md-settings" style={styles.tabView}>
-          <View style={styles.card}>
-            <Text>Settings</Text>
-          </View>
-        </ScrollView>
+        <NewsTab tabLabel="ios-paper" tabStyle={styles}/>
+        <TelemetryTab tabLabel="md-planet" tabStyle={styles}/>
+        <LearningTab tabLabel="md-school" tabStyle={styles}/>
+        <NotificationsTab tabLabel="md-notifications" tabStyle={styles}/>
+        <SettingsTab tabLabel="md-settings" tabStyle={styles}/>
       </ScrollableTabView>
     );
   }
