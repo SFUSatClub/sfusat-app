@@ -17,6 +17,7 @@
     "react": "~15.3.2",
     "react-native": "^0.35.0",
     "react-native-drawer": "^2.3.0",
+    "react-native-fbsdk": "^0.3.0",
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",

@@ -18,6 +18,15 @@ export default class TelemetryTab extends Component {
         <View style={this.props.tabStyle.card}>
           <Text>Live data</Text>
         </View>
+        <View style={this.props.tabStyle.card}>
+          <Text>Live data</Text>
+        </View>
+        <View style={this.props.tabStyle.card}>
+          <Text>Live data</Text>
+        </View>
+        <View style={this.props.tabStyle.card}>
+          <Text>Live data</Text>
+        </View>
       </ScrollView>
     );
   }
