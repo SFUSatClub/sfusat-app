@@ -7,25 +7,24 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import * as actionCreators from './actions/counter';
 
+import { composeWithDevTools } from 'remote-redux-devtools';
+
 const middlewares = [thunk];
 
 let enhancer;
 let updateStore = f => f;
 if (__DEV__) {
+  const Reactotron = require('reactotron-react-native').default
+  Reactotron
+    .configure()
+    .connect()
+
   /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
   const installDevTools = require('immutable-devtools');
-  const devTools = global.reduxNativeDevTools || require('remote-redux-devtools');
-
   installDevTools(Immutable);
-  updateStore = devTools.updateStore || updateStore;
 
-  enhancer = compose(
+  enhancer = composeWithDevTools(
     applyMiddleware(...middlewares),
-    devTools({
-      name: Platform.OS,
-      ...require('../package.json').remotedev,
-      actionCreators,
-    })
   );
 } else {
   enhancer = applyMiddleware(...middlewares);

@@ -59,7 +59,7 @@ export default class Home extends Component {
         initialPage={0}
         renderTabBar={() => <CustomTabBar underlineStyle={{height:3}}/>}
       >
-        <NewsTab tabLabel="ios-paper" tabStyle={styles}/>
+        <NewsTab tabLabel="ios-paper" tabStyle={styles} navigate={this.props.navigate}/>
         <TelemetryTab tabLabel="md-planet" tabStyle={styles}/>
         <LearningTab tabLabel="md-school" tabStyle={styles}/>
         <NotificationsTab tabLabel="md-notifications" tabStyle={styles}/>

@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import Reactotron from 'reactotron-react-native'
+
 import Counter from '../components/Counter';
 import * as CounterActions from '../actions/counter';
 
@@ -48,6 +51,7 @@ export default class NewsTab extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
+        Reactotron.log({ numbers: [1, 2, 3], boolean: false, nested: { here: 'we go' } });
         this.setState({
           response: JSON.stringify(responseJson),
           refreshing: false,
@@ -61,6 +65,14 @@ export default class NewsTab extends Component {
 
   componentWillMount() {
     this.testApiAsync();
+  }
+
+  toCounter = () => {
+    const { navigate } = this.props;
+    navigate({
+      type: 'push',
+      key: 'counter'
+    });
   }
 
   render() {
@@ -77,7 +89,9 @@ export default class NewsTab extends Component {
       >
         <View style={this.props.tabStyle.card}>
           <Text>Times refreshed: {this.state.counter}</Text>
-          <Text>{this.state.response}</Text>
+          <TouchableOpacity onPress={this.toCounter}>
+            <Text>{this.state.response}</Text>
+          </TouchableOpacity>
         </View>
         <View style={this.props.tabStyle.card}>
           <Text>Fraser Space Systems News</Text>

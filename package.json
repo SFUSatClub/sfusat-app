@@ -8,6 +8,7 @@
     "log": "node node_modules/react-native/local-cli/cli.js log-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "link": "node node_modules/react-native/local-cli/cli.js link",
+    "reactotron": "adb reverse tcp:9090 tcp:9090",
     "postinstall": "npm run link"
   },
   "dependencies": {
@@ -22,5 +23,10 @@
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1"
+  },
+  "devDependencies": {
+    "immutable-devtools": "0.0.7",
+    "reactotron-react-native": "^1.1.4",
+    "remote-redux-devtools": "^0.5.0"
   }
 }
