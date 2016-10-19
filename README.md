@@ -4,9 +4,9 @@
 
 ## Included
 
-* [React](https://github.com/facebook/react) & [React Native](https://github.com/facebook/react-native)
-* [Redux](https://github.com/reactjs/redux) & [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools) & [On Debugger](https://github.com/jhen0409/remote-redux-devtools-on-debugger)
-* [Immutable](https://github.com/facebook/immutable-js) & [Immutable DevTools](https://github.com/andrewdavey/immutable-devtools)
+- [React](https://github.com/facebook/react) & [React Native](https://github.com/facebook/react-native)
+- [Redux](https://github.com/reactjs/redux) & [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools) & [On Debugger](https://github.com/jhen0409/remote-redux-devtools-on-debugger)
+- [Immutable](https://github.com/facebook/immutable-js) & [Immutable DevTools](https://github.com/andrewdavey/immutable-devtools)
 
 ## Installation
 
@@ -20,6 +20,15 @@ $ npm install
 ## Development
 
 #### Start local server
+
+It is suggested to install [watchman](https://facebook.github.io/watchman/docs/install.html), but it
+is not required. Installing watchman speeds up the development process by allowing `npm start` to
+bundle the app faster (spends less time looking for changed files, faster at traversing directory
+trees).
+
+Watchman will be automatically used once installed. More info on Watchman
+[here](https://facebook.github.io/watchman/).
+
 
 ```bash
 $ npm start
@@ -57,8 +66,8 @@ $ npm run ios-open
 
 ## Credits
 
-* [react-native-boilerplate](https://github.com/jhen0409/react-native-boilerplate)
+- [react-native-boilerplate](https://github.com/jhen0409/react-native-boilerplate)
 
-## LICENSE
+## Licence
 
-[MIT](LICENSE)
+- [MIT](LICENSE)
