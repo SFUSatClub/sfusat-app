@@ -17,16 +17,19 @@ export default class NewsTab extends Component {
     this.state = {
       response: ""
     }
+    this.testApiAsync = this.testApiAsync.bind(this);
   }
 
   testApiAsync() {
     //return fetch('https://facebook.github.io/react-native/movies.json')
     //return fetch('https://jsonplaceholder.typicode.com/posts')
-    return fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-        return responseJson;
+        this.setState({
+          response: JSON.stringify(responseJson)
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -34,14 +37,7 @@ export default class NewsTab extends Component {
   }
 
   componentWillMount() {
-    const movies = this.testApiAsync();
-    console.log("is promise: " + (typeof movies.then === 'function'));
-    movies.then((response) => {
-      console.log("wtf" + response);
-      this.setState({
-        response: JSON.stringify(response)
-      });
-    });
+    this.testApiAsync();
   }
 
   render() {
