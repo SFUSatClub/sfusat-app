@@ -21,7 +21,6 @@ import darkTheme from '../themes/dark.js'
 const styles = StyleSheet.create({
   tabView: {
     flex: 1,
-    padding: 10,
     backgroundColor: 'rgba(0,0,0,0.01)',
   },
   card: {
@@ -31,6 +30,8 @@ const styles = StyleSheet.create({
     margin: 5,
     minHeight: 150,
     padding: 15,
+    margin: 20,
+    marginBottom: 0,
     shadowColor: '#ccc',
     shadowOffset: { width: 2, height: 2, },
     shadowOpacity: 0.5,
