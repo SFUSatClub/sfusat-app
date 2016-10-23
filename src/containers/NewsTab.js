@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 
 import Reactotron from 'reactotron-react-native'
 
+import NewsItem from '../components/NewsItem';
 import Counter from '../components/Counter';
 import * as CounterActions from '../actions/counter';
 
@@ -78,6 +79,7 @@ export default class NewsTab extends Component {
   render() {
     return (
       <ScrollView
+        style={{marginTop: -1}}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -85,17 +87,20 @@ export default class NewsTab extends Component {
             colors={['#303F9F']}
           />
         }
-        style={this.props.tabStyle.tabView}
       >
-        <View style={this.props.tabStyle.card}>
-          <Text>Times refreshed: {this.state.counter}</Text>
-          <TouchableOpacity onPress={this.toCounter}>
-            <Text>{this.state.response}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={this.props.tabStyle.card}>
-          <Text>Fraser Space Systems News</Text>
-        </View>
+        <NewsItem 
+          source={"Facebook"}
+          content={"Hello"}
+          img={"img"}
+          counter={this.state.counter} 
+          toCounter={this.toCounter}
+          response={this.state.response}
+          tabStyle={this.props.tabStyle}/>
+        <NewsItem 
+          counter={this.state.counter} 
+          toCounter={this.toCounter}
+          response={this.state.response}
+          tabStyle={this.props.tabStyle}/>
         <View style={this.props.tabStyle.card}>
           <Text>Fraser Space Systems News</Text>
         </View>
