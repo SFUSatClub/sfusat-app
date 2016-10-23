@@ -55,7 +55,6 @@ export default class Home extends Component {
   render() {
     return (
       <ScrollableTabView
-        style={{marginTop: 10, }}
         initialPage={0}
         renderTabBar={() => <CustomTabBar underlineStyle={{height:3}}/>}
       >
