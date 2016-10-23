@@ -41,6 +41,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3,
   },
+  newCard: {
+    flex: 0,
+    padding: -1,
+    marginBottom: 15,
+  },
+  cardItemH: {
+    //borderBottomWidth: 0,
+  },
   cardItem: {
     //borderBottomWidth: 0,
   },
@@ -54,36 +62,35 @@ export default class NewsItem extends Component {
     super(props);
     Image.getSize('https://liquiddandruff.github.io/reveal.js/cubesat.jpg', (width, height) => {
       console.log("cubesat h: " + height);
-      this.state = {
-        originHeight: height,
-      }
     });
     this.state = {
-      ...this.state,
       imageWidth: 0,
       imageHeight: 0,
     };
-
-    console.log(this.state);
   }
 
   render() {
-    const { counter, toCounter, response, tabStyle } = this.props;
-    /*<Card style={tabStyle.card}>*/
-    //style={{justifyContent:'center',alignItems:'center'}}
+    const { counter, toCounter, tabStyle } = this.props;
     return (
       <Card 
-        style={{padding:-1}}
+        style={styles.newCard}
         onLayout={(event) => {
           const {x, y, width, height} = event.nativeEvent.layout;
           this.setState({imageWidth: width});
         }}
       >
-        <CardItem style={styles.cardItem}>
-          <Thumbnail source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
-          <Text>Cubesat</Text>
-          <Text note>FSS Facebook</Text>
+        <CardItem style={styles.cardItemH}>
+          <Thumbnail size={50} source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
+          <Text>{this.props.title}</Text>
+          <Text note>{this.props.provider}</Text>
         </CardItem>
+
+        <CardItem style={styles.cardItem}>
+          <CardItem style={[styles.cardItem, {borderBottomWidth:0}]}>
+            <Text style={{fontWeight:'normal'}}>{this.props.content}</Text>
+          </CardItem>
+        </CardItem>
+
 
         <CardItem style={styles.cardItem}>
           <Image 
@@ -94,15 +101,18 @@ export default class NewsItem extends Component {
           {/*<Image resizeMode='contain' style={{marginLeft:-300}} source={require('./cubesat.jpg')} />*/}
         </CardItem>
 
-        <CardItem style={[styles.cardItem, {flex: 1, alignItems:'center'}]}>
+        <CardItem style={[styles.cardItem, {flexDirection: 'row', justifyContent: 'space-around'}]}>
           <View>
             <Icon name='md-heart' style={{color : '#ED4A6A'}} />
           </View>
+          <View>
+            <Icon name='md-chatboxes' style={{color : '#ED4A6A'}} />
+          </View>
+          <View>
+            <Icon name='md-share-alt' style={{color : '#ED4A6A'}} />
+          </View>
         </CardItem>
 
-        <CardItem style={[styles.cardItem, {borderBottomWidth:0}]}>
-          <Text>Cubesat from NASA!</Text>
-        </CardItem>
 
       </Card>
     );

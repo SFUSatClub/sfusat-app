@@ -77,6 +77,7 @@ export default class NewsTab extends Component {
   }
 
   render() {
+    const ipsum = "I don't know what you could say about a day in which you have seen four beautiful sunsets.\n\nMany say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.\n\nWe choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard, because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one which we intend to win.\n\nProblems look mighty small from 150 miles up.";
     return (
       <ScrollView
         style={{marginTop: -1}}
@@ -89,21 +90,23 @@ export default class NewsTab extends Component {
         }
       >
         <NewsItem 
-          source={"Facebook"}
-          content={"Hello"}
+          title={"SFU Satellite Design Club"}
+          provider={"Facebook"}
+          content={ipsum}
           img={"img"}
           counter={this.state.counter} 
           toCounter={this.toCounter}
-          response={this.state.response}
           tabStyle={this.props.tabStyle}/>
+
         <NewsItem 
+          title={"SFU Satellite Design Club"}
+          provider={"Instagram"}
+          content={this.state.response}
+          img={"img"}
           counter={this.state.counter} 
           toCounter={this.toCounter}
-          response={this.state.response}
           tabStyle={this.props.tabStyle}/>
-        <View style={this.props.tabStyle.card}>
-          <Text>Fraser Space Systems News</Text>
-        </View>
+
         <View style={this.props.tabStyle.card}>
           <Text>Fraser Space Systems News</Text>
         </View>
