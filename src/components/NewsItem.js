@@ -72,6 +72,13 @@ export default class NewsItem extends Component {
   render() {
     const { counter, toCounter, tabStyle, instagramModel } = this.props;
 
+    // get the large version of each image so it crops and looks nicer
+    let largeDest = undefined;
+    if(instagramModel) {
+      largeDest = 'https://www.instagram.com/p/' + instagramModel.code + '/media/?size=l'
+      console.log(`largeDest: ${largeDest}`);
+    }
+
     return (
       <Card 
         style={styles.newCard}
@@ -100,11 +107,12 @@ export default class NewsItem extends Component {
           </CardItem>
         </CardItem>
 
-        <CardItem style={styles.cardItem}>
+        <CardItem style={[styles.cardItem, {flex: 0}]}>
           {instagramModel ?
             <Image
+              style={{flex:0, }}
               resizeMode='cover'
-              source={{uri:instagramModel.images.standard_resolution.url}} />
+              source={{uri:largeDest}} />
                 :
             <Image 
               resizeMode='cover'

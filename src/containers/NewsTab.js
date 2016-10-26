@@ -99,6 +99,7 @@ export default class NewsTab extends Component {
             counter={this.state.counter} 
             toCounter={this.toCounter}
             tabStyle={this.props.tabStyle}
+            key={entry.code}
           />
         )}
 
