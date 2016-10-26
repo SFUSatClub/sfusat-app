@@ -10,8 +10,6 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Reactotron from 'reactotron-react-native'
-
 import NewsItem from '../components/NewsItem';
 import Counter from '../components/Counter';
 import * as CounterActions from '../actions/counter';
@@ -26,35 +24,39 @@ export default class NewsTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      response: "Loading...",
+      instagramFeed: [],
       refreshing: false,
       counter: 0,
     };
-    this.testApiAsync = this.testApiAsync.bind(this);
+    this.loadInstagramFeed = this.loadInstagramFeed.bind(this);
   }
 
   _onRefresh() {
     this.setState({
-      response: "Loading...",
       refreshing: true,
       counter: this.state.counter + 1,
     });
-    this.testApiAsync();
-    // this.testApiAsync().then(() => {
+    this.loadInstagramFeed();
+    // this.loadInstagramFeed().then(() => {
     //   this.setState({refreshing: false});
     // });
   }
 
-  testApiAsync() {
+  loadInstagramFeed() {
     //return fetch('https://facebook.github.io/react-native/movies.json')
     //return fetch('https://jsonplaceholder.typicode.com/posts')
-    return fetch('https://jsonplaceholder.typicode.com/users/1')
+    // feed demo, sfu.satellite id
+    // https://smashballoon.com/instagram-feed/demo/?id=3246383861&cols=4
+    // instagram json feed, public api
+    // https://www.instagram.com/sfu.satellite/media/
+    // get large size from items[x].code
+    // https://www.instagram.com/p/BITea7bj5nc/media/?size=l
+    return fetch('https://www.instagram.com/sfu.satellite/media/')
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-        Reactotron.log({ numbers: [1, 2, 3], boolean: false, nested: { here: 'we go' } });
         this.setState({
-          response: JSON.stringify(responseJson),
+          instagramFeed: responseJson.items,
           refreshing: false,
         });
         return responseJson;
@@ -65,7 +67,7 @@ export default class NewsTab extends Component {
   }
 
   componentWillMount() {
-    this.testApiAsync();
+    this.loadInstagramFeed();
   }
 
   toCounter = () => {
@@ -89,6 +91,17 @@ export default class NewsTab extends Component {
           />
         }
       >
+        {//this.state.instagramFeed.slice(0, 2).map((entry) => 
+        this.state.instagramFeed.map((entry) => 
+          <NewsItem
+            title={"SFU Satellite Design Club"}
+            instagramModel={entry} 
+            counter={this.state.counter} 
+            toCounter={this.toCounter}
+            tabStyle={this.props.tabStyle}
+          />
+        )}
+
         <NewsItem 
           title={"SFU Satellite Design Club"}
           provider={"Facebook"}
@@ -98,18 +111,6 @@ export default class NewsTab extends Component {
           toCounter={this.toCounter}
           tabStyle={this.props.tabStyle}/>
 
-        <NewsItem 
-          title={"SFU Satellite Design Club"}
-          provider={"Instagram"}
-          content={this.state.response}
-          img={"img"}
-          counter={this.state.counter} 
-          toCounter={this.toCounter}
-          tabStyle={this.props.tabStyle}/>
-
-        <View style={this.props.tabStyle.card}>
-          <Text>Fraser Space Systems News</Text>
-        </View>
         <View style={[this.props.tabStyle.card, {marginBottom: 20}]}>
           <Text>Fraser Space Systems News</Text>
         </View>

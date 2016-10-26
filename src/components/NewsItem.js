@@ -22,6 +22,7 @@ import {
 } from 'native-base';
 
 import Immutable from 'immutable';
+import darkTheme from '../themes/dark';
 
 const styles = StyleSheet.create({
   text: {
@@ -61,7 +62,6 @@ export default class NewsItem extends Component {
   constructor(props) {
     super(props);
     Image.getSize('https://liquiddandruff.github.io/reveal.js/cubesat.jpg', (width, height) => {
-      console.log("cubesat h: " + height);
     });
     this.state = {
       imageWidth: 0,
@@ -70,7 +70,8 @@ export default class NewsItem extends Component {
   }
 
   render() {
-    const { counter, toCounter, tabStyle } = this.props;
+    const { counter, toCounter, tabStyle, instagramModel } = this.props;
+
     return (
       <Card 
         style={styles.newCard}
@@ -82,34 +83,44 @@ export default class NewsItem extends Component {
         <CardItem style={styles.cardItemH}>
           <Thumbnail size={50} source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
           <Text>{this.props.title}</Text>
-          <Text note>{this.props.provider}</Text>
+          {instagramModel ? 
+            <Text note>{"Instagram"}</Text>
+              :
+            <Text note>{this.props.provider}</Text>
+          }
         </CardItem>
 
         <CardItem style={styles.cardItem}>
           <CardItem style={[styles.cardItem, {borderBottomWidth:0}]}>
-            <Text style={{fontWeight:'normal'}}>{this.props.content}</Text>
+            {instagramModel ?
+              <Text style={{fontWeight:'normal'}}>{instagramModel.caption.text}</Text>
+                :
+              <Text style={{fontWeight:'normal'}}>{this.props.content}</Text>
+            }
           </CardItem>
         </CardItem>
 
-
         <CardItem style={styles.cardItem}>
-          <Image 
-            resizeMode='cover' source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
-          {/*<Image 
-            style={{width:this.state.imageWidth, height:this.state.imageHeight}} 
-            resizeMode='contain' source={require('./cubesat.jpg')} /> */}
-          {/*<Image resizeMode='contain' style={{marginLeft:-300}} source={require('./cubesat.jpg')} />*/}
+          {instagramModel ?
+            <Image
+              resizeMode='cover'
+              source={{uri:instagramModel.images.standard_resolution.url}} />
+                :
+            <Image 
+              resizeMode='cover'
+              source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
+          }
         </CardItem>
 
         <CardItem style={[styles.cardItem, {flexDirection: 'row', justifyContent: 'space-around'}]}>
           <View>
-            <Icon name='md-heart' style={{color : '#ED4A6A'}} />
+            <Icon name='md-heart' style={{color : darkTheme.customIndigo}} />
           </View>
           <View>
-            <Icon name='md-chatboxes' style={{color : '#ED4A6A'}} />
+            <Icon name='md-chatboxes' style={{color : darkTheme.customIndigo}} />
           </View>
           <View>
-            <Icon name='md-share-alt' style={{color : '#ED4A6A'}} />
+            <Icon name='md-share-alt' style={{color : darkTheme.customIndigo}} />
           </View>
         </CardItem>
 

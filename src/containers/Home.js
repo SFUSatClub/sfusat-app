@@ -16,7 +16,7 @@ import NotificationsTab from '../containers/NotificationsTab';
 import SettingsTab from '../containers/SettingsTab';
 
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base';
-import darkTheme from '../themes/dark.js'
+import darkTheme from '../themes/dark';
 
 const styles = StyleSheet.create({
   tabView: {

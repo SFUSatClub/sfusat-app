@@ -105,7 +105,7 @@ export default {
     // Footer
     footerHeight: 55,
     footerDefaultBg: (Platform.OS === 'ios' ) ? '#F8F8F8' : '#303F9F',
-    // indigo
+    customIndigo: '#303F9F',
 
 
     //FooterTab
