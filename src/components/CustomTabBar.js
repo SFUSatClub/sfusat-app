@@ -23,8 +23,7 @@ const CustomTabBar = React.createClass({
 
   setAnimationValue({ value, }) {
     this.tabIcons.forEach((icon, i) => {
-      const progress = (value >= i && value < i + 1) ? value - i :
-        (value >= i - 1 && value < i) ? i - value : 1;
+      const progress = Math.min(1, Math.abs(value - i));
       icon.setNativeProps({
         style: {
           color: this.iconColor(progress),

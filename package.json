@@ -8,16 +8,15 @@
     "log": "node node_modules/react-native/local-cli/cli.js log-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "link": "node node_modules/react-native/local-cli/cli.js link",
-    "reactotron": "adb reverse tcp:9090 tcp:9090",
     "reverse": "adb reverse tcp:8081 tcp:8081",
     "postinstall": "npm run link"
   },
   "dependencies": {
     "immutable": "^3.7.6",
-    "lodash": "^4.3.0",
-    "native-base": "^0.5.9",
-    "react": "~15.3.2",
-    "react-native": "^0.35.0",
+    "lodash": "^4.16.6",
+    "native-base": "^0.5.20",
+    "react": "~15.4.1",
+    "react-native": "^0.39.0",
     "react-native-drawer": "^2.3.0",
     "react-native-fbsdk": "^0.3.0",
     "react-native-scrollable-tab-view": "^0.6.0",
@@ -27,7 +26,6 @@
   },
   "devDependencies": {
     "immutable-devtools": "0.0.7",
-    "reactotron-react-native": "^1.1.4",
     "remote-redux-devtools": "^0.5.0"
   }
 }
