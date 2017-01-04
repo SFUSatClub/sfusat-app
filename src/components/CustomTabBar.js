@@ -65,6 +65,7 @@ const CustomTabBar = React.createClass({
           />
         </TouchableOpacity>;
       })}
+      <View style={{position:'absolute', width:containerWidth, height:1, backgroundColor: 'rgba(0,0,0,0.05)', bottom:0}} />
       <Animated.View style={[tabUnderlineStyle, { left, }, this.props.underlineStyle, ]} />
     </View>;
   },
@@ -81,11 +82,6 @@ const styles = StyleSheet.create({
   tabs: {
     height: 55,
     flexDirection: 'row',
-    borderWidth: 1,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderBottomColor: 'rgba(0,0,0,0.05)',
   },
 });
 
