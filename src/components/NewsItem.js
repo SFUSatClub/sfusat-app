@@ -7,6 +7,7 @@ import {
   StyleSheet,
   View, 
   Image,
+  Text, 
   TouchableOpacity, 
 } from 'react-native';
 
@@ -16,7 +17,6 @@ import {
   Card, 
   CardItem, 
   Thumbnail, 
-  Text, 
   Icon,
   Button,
 } from 'native-base';
@@ -43,8 +43,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   newCard: {
-    flex: 0,
-    padding: -1,
+    flex: 1,
+    flexDirection: 'column',
+    padding: 0,
     marginBottom: 15,
   },
   cardItemH: {
@@ -61,12 +62,21 @@ export default class NewsItem extends Component {
 
   constructor(props) {
     super(props);
-    Image.getSize('https://liquiddandruff.github.io/reveal.js/cubesat.jpg', (width, height) => {
-    });
     this.state = {
-      imageWidth: 0,
-      imageHeight: 0,
-    };
+      imageLoaded: false,
+    }
+    Image.getSize('https://liquiddandruff.github.io/reveal.js/cubesat.jpg', (width, height) => {
+      let scaledWidth = 360;
+      const scaleFactor = width / scaledWidth;
+      let scaledHeight = height / scaleFactor;
+      //console.log(`dl_W: ${width} dl_H: ${height} sf: ${scaleFactor} sh: ${scaledHeight}`);
+      this.state = {
+        imageWidth: width,
+        imageHeight: height,
+        imageWidthScaled: scaledWidth,
+        imageHeightScaled: scaledHeight,
+      };
+    });
   }
 
   render() {
@@ -76,49 +86,72 @@ export default class NewsItem extends Component {
     let largeDest = undefined;
     if(instagramModel) {
       largeDest = 'https://www.instagram.com/p/' + instagramModel.code + '/media/?size=l'
-      console.log(`largeDest: ${largeDest}`);
+      //console.log(`largeDest: ${largeDest}`);
+    }
+    const { imageLoaded } = this.state;
+    let imageLoadedStyle = {};
+    if(imageLoaded) {
+      imageLoadedStyle = {width: this.state.imageWidthScaled, height: this.state.imageHeightScaled};
     }
 
     return (
-      <Card 
+      <View 
         style={styles.newCard}
         onLayout={(event) => {
           const {x, y, width, height} = event.nativeEvent.layout;
-          this.setState({imageWidth: width});
+          this.setState({cardWidth: width});
         }}
       >
-        <CardItem style={styles.cardItemH}>
-          <Thumbnail size={50} source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
-          <Text>{this.props.title}</Text>
-          {instagramModel ? 
-            <Text note>{"Instagram"}</Text>
-              :
-            <Text note>{this.props.provider}</Text>
-          }
-        </CardItem>
 
-        <CardItem style={styles.cardItem}>
-          <CardItem style={[styles.cardItem, {borderBottomWidth:0}]}>
-            {instagramModel ?
-              <Text style={{fontWeight:'normal'}}>{instagramModel.caption.text}</Text>
-                :
-              <Text style={{fontWeight:'normal'}}>{this.props.content}</Text>
-            }
-          </CardItem>
-        </CardItem>
+        {/* Header */}
+        {instagramModel ? 
+          <View style={{flexDirection:'row', justifyContent:'space-between', paddingLeft:10, paddingRight:10}}>
+            <View style={{flexDirection:'row'}}>
+              <Thumbnail
+                style={{marginRight:10}}
+                size={40}
+                resizeMode='cover'
+                source={{uri:instagramModel.user.profile_picture}} />
+              <View style={{justifyContent:'center'}}>
+                <Text style={{fontWeight:'bold', color:'black'}}>{instagramModel.user.username}</Text>
+                {instagramModel.location &&
+                  <Text style={{color:'black'}}>{instagramModel.location.name}</Text>
+                }
+              </View>
+            </View>
+            <View style={{justifyContent:'center'}}>
+              <Text style={{fontWeight:'bold', color:'black'}}>{"Instagram"}</Text>
+            </View>
+          </View>
+            :
+          <View style={{flexDirection:'row', }}>
+            <Text style={{color:'black'}}>{this.props.provider}</Text>
+          </View>
+        }
 
-        <CardItem style={[styles.cardItem, {flex: 0}]}>
+        {/* Text */}
+        <View style={{padding: 20}}>
+          <Text style={{fontWeight:'normal', fontSize: 14, color:'black'}}>
+            {instagramModel ? instagramModel.caption.text : this.props.content}
+          </Text>
+        </View>
+
+        {/* Img */}
+        <View>
           {instagramModel ?
             <Image
-              style={{flex:0, }}
+              style={imageLoadedStyle}
               resizeMode='cover'
+              onLoad={() => this.setState({imageLoaded: true}) }
               source={{uri:largeDest}} />
                 :
             <Image 
+              style={{width: this.state.cardWidth, height: this.state.cardWidth}}
               resizeMode='cover'
+              onLoad={() => this.setState({imageLoaded: true}) }
               source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
           }
-        </CardItem>
+        </View>
 
         <CardItem style={[styles.cardItem, {flexDirection: 'row', justifyContent: 'space-around'}]}>
           <View>
@@ -132,8 +165,7 @@ export default class NewsItem extends Component {
           </View>
         </CardItem>
 
-
-      </Card>
+      </View>
     );
   }
 }
