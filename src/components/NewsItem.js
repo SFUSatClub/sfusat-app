@@ -21,6 +21,9 @@ import {
   Button,
 } from 'native-base';
 
+
+import Video from 'react-native-video';
+
 import Immutable from 'immutable';
 import darkTheme from '../themes/dark';
 
@@ -71,6 +74,7 @@ export default class NewsItem extends Component {
       let scaledHeight = height / scaleFactor;
       //console.log(`dl_W: ${width} dl_H: ${height} sf: ${scaleFactor} sh: ${scaledHeight}`);
       this.state = {
+        imageLoaded: true,
         imageWidth: width,
         imageHeight: height,
         imageWidthScaled: scaledWidth,
@@ -80,18 +84,38 @@ export default class NewsItem extends Component {
   }
 
   render() {
-    const { counter, toCounter, tabStyle, instagramModel } = this.props;
-
-    // get the large version of each image so it crops and looks nicer
-    let largeDest = undefined;
-    if(instagramModel) {
-      largeDest = 'https://www.instagram.com/p/' + instagramModel.code + '/media/?size=l'
-      //console.log(`largeDest: ${largeDest}`);
-    }
     const { imageLoaded } = this.state;
     let imageLoadedStyle = {};
     if(imageLoaded) {
       imageLoadedStyle = {width: this.state.imageWidthScaled, height: this.state.imageHeightScaled};
+    }
+
+    const { counter, toCounter, tabStyle, instagramModel } = this.props;
+
+    // get the large version of each image so it crops and looks nicer
+    let largeDest = undefined;
+    let instagramMedia = undefined;
+    if(instagramModel) {
+      largeDest = 'https://www.instagram.com/p/' + instagramModel.code + '/media/?size=l'
+      // if is video
+      if(instagramModel.alt_media_url) {
+        instagramMedia = (
+            <Video
+              style={imageLoadedStyle}
+              resizeMode='cover'
+              repeat={true}
+              muted={true}
+              source={{uri:instagramModel.alt_media_url}} />
+        )
+      } else {
+        instagramMedia = (
+            <Image
+              style={imageLoadedStyle}
+              resizeMode='cover'
+              source={{uri:largeDest}} />
+        )
+      }
+      //console.log(`largeDest: ${largeDest}`);
     }
 
     return (
@@ -139,11 +163,7 @@ export default class NewsItem extends Component {
         {/* Img */}
         <View>
           {instagramModel ?
-            <Image
-              style={imageLoadedStyle}
-              resizeMode='cover'
-              onLoad={() => this.setState({imageLoaded: true}) }
-              source={{uri:largeDest}} />
+            instagramMedia
                 :
             <Image 
               style={{width: this.state.cardWidth, height: this.state.cardWidth}}
