@@ -34,9 +34,9 @@ const CustomTabBar = React.createClass({
 
   //color between rgb(59,89,152) and rgb(204,204,204)
   iconColor(progress) {
-    const red = 59 + (204 - 59) * progress;
-    const green = 89 + (204 - 89) * progress;
-    const blue = 152 + (204 - 152) * progress;
+    const red = 40 + (204 - 40) * progress;
+    const green = 60 + (204 - 60) * progress;
+    const blue = 103 + (204 - 103) * progress;
     return `rgb(${red}, ${green}, ${blue})`;
   },
 
@@ -47,7 +47,7 @@ const CustomTabBar = React.createClass({
       position: 'absolute',
       width: containerWidth / numberOfTabs,
       height: 3,
-      backgroundColor: 'navy',
+      backgroundColor: 'rgb(40, 60, 103)',
       bottom: 0,
     };
 
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   tabs: {
     height: 55,
     flexDirection: 'row',
+    backgroundColor: '#292929',
   },
 });
 
