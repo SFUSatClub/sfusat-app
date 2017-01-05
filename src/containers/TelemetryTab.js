@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Counter from '../components/Counter';
+
+import TelemetryPanel from '../components/TelemetryPanel';
 import * as CounterActions from '../actions/counter';
 
 const styles = StyleSheet.create({
@@ -104,30 +105,30 @@ export default class TelemetryTab extends Component {
       >
         <View style={styles.tab}>
           <View style={{flex:3, flexDirection:'row'}}>
-            <View style={[{flex: 1}, styles.panel]}>
-              <Text>Live data</Text>
-            </View>
-            <View style={[{flex: 2}, styles.panel]}>
-              <Text>Live data</Text>
-            </View>
+            <TelemetryPanel flex={1}>
+              <Text>Satellite Telemetry</Text>
+            </TelemetryPanel>
+            <TelemetryPanel flex={2}>
+              <Text>Graphs</Text>
+            </TelemetryPanel>
           </View>
           <View style={{flex:2, flexDirection:'row'}}>
-            <View style={[{flex: 1}, styles.panel]}>
-              <Text>Live data</Text>
-            </View>
-            <View style={[{flex: 1}, styles.panel]}>
-              <Text>Live data</Text>
-            </View>
+            <TelemetryPanel flex={1}>
+              <Text>Payload Telemetry</Text>
+            </TelemetryPanel>
+            <TelemetryPanel flex={1}>
+              <Text>Satellite GPS</Text>
+            </TelemetryPanel>
           </View>
           <View style={{flex:2, flexDirection:'row'}}>
-            <View style={[{flex: 1}, styles.panel]}>
-              <Text>Live data</Text>
-            </View>
+            <TelemetryPanel flex={1}>
+              <Text>Command Log</Text>
+            </TelemetryPanel>
           </View>
           <View style={{flex:2, flexDirection:'row'}}>
-            <View style={[{flex: 1}, styles.panel]}>
-              <Text>Live data</Text>
-            </View>
+            <TelemetryPanel flex={1}>
+              <Text>Mission Information</Text>
+            </TelemetryPanel>
           </View>
         </View>
       </ScrollView>

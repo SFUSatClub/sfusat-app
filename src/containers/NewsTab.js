@@ -98,6 +98,7 @@ export default class NewsTab extends Component {
     return (
       <ListView
         style={{marginTop: -1}}
+        initialListSize={2}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
