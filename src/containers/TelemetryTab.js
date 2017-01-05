@@ -12,6 +12,25 @@ import { connect } from 'react-redux';
 import Counter from '../components/Counter';
 import * as CounterActions from '../actions/counter';
 
+const styles = StyleSheet.create({
+  tab: {
+    padding: 4,
+    height: 600
+  },
+  panel: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: 'rgba(0,0,0,0.1)',
+    margin: 4,
+    //minHeight: 150,
+    padding: 10,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 2, height: 2, },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+  },
+});
+
 @connect(
   state => ({
     newsFeed: state.newsFeed
@@ -74,7 +93,7 @@ export default class TelemetryTab extends Component {
   render() {
     return (
       <ScrollView
-        style={{marginTop: -1}}
+        style={{marginTop:-1}}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -83,11 +102,33 @@ export default class TelemetryTab extends Component {
           />
         }
       >
-        <View style={this.props.tabStyle.card}>
-          <Text>Live data</Text>
-        </View>
-        <View style={this.props.tabStyle.card}>
-          <Text>Live data</Text>
+        <View style={styles.tab}>
+          <View style={{flex:3, flexDirection:'row'}}>
+            <View style={[{flex: 1}, styles.panel]}>
+              <Text>Live data</Text>
+            </View>
+            <View style={[{flex: 2}, styles.panel]}>
+              <Text>Live data</Text>
+            </View>
+          </View>
+          <View style={{flex:2, flexDirection:'row'}}>
+            <View style={[{flex: 1}, styles.panel]}>
+              <Text>Live data</Text>
+            </View>
+            <View style={[{flex: 1}, styles.panel]}>
+              <Text>Live data</Text>
+            </View>
+          </View>
+          <View style={{flex:2, flexDirection:'row'}}>
+            <View style={[{flex: 1}, styles.panel]}>
+              <Text>Live data</Text>
+            </View>
+          </View>
+          <View style={{flex:2, flexDirection:'row'}}>
+            <View style={[{flex: 1}, styles.panel]}>
+              <Text>Live data</Text>
+            </View>
+          </View>
         </View>
       </ScrollView>
     );
