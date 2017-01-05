@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { 
   StyleSheet,
-  ScrollView, 
+  ListView,
   View, 
+  RecyclerViewBackedScrollView,
   Text, 
   TouchableOpacity, 
   RefreshControl
@@ -23,12 +24,14 @@ import * as CounterActions from '../actions/counter';
 export default class NewsTab extends Component {
   constructor(props) {
     super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      instagramFeed: [],
+      dataSource: ds,
       refreshing: false,
       counter: 0,
     };
     this.loadInstagramFeed = this.loadInstagramFeed.bind(this);
+    this._renderRow = this._renderRow.bind(this);
   }
 
   _onRefresh() {
@@ -56,7 +59,7 @@ export default class NewsTab extends Component {
       .then((responseJson) => {
         console.log(responseJson);
         this.setState({
-          instagramFeed: responseJson.items,
+          dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
           refreshing: false,
         });
         return responseJson;
@@ -78,11 +81,26 @@ export default class NewsTab extends Component {
     });
   }
 
+  _renderRow(rowData, sectionID, rowID, highlightRow) {
+    return (
+      <NewsItem
+        instagramModel={rowData} 
+        counter={this.state.counter} 
+        toCounter={this.toCounter}
+        tabStyle={this.props.tabStyle}
+        key={rowData.code}
+      />
+    );
+  }
+
   render() {
     const ipsum = "I don't know what you could say about a day in which you have seen four beautiful sunsets.\n\nMany say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.\n\nWe choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard, because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one which we intend to win.\n\nProblems look mighty small from 150 miles up.";
     return (
-      <ScrollView
+      <ListView
         style={{marginTop: -1}}
+        dataSource={this.state.dataSource}
+        renderRow={this._renderRow}
+        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -91,18 +109,6 @@ export default class NewsTab extends Component {
           />
         }
       >
-        {//this.state.instagramFeed.slice(0, 2).map((entry) => 
-        this.state.instagramFeed.map((entry) => 
-          <NewsItem
-            title={"SFU Satellite Design Club"}
-            instagramModel={entry} 
-            counter={this.state.counter} 
-            toCounter={this.toCounter}
-            tabStyle={this.props.tabStyle}
-            key={entry.code}
-          />
-        )}
-
         <NewsItem 
           title={"SFU Satellite Design Club"}
           provider={"Facebook"}
@@ -112,10 +118,7 @@ export default class NewsTab extends Component {
           toCounter={this.toCounter}
           tabStyle={this.props.tabStyle}/>
 
-        <View style={[this.props.tabStyle.card, {marginBottom: 20}]}>
-          <Text>Fraser Space Systems News</Text>
-        </View>
-      </ScrollView>
+      </ListView>
     );
   }
 }
