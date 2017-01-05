@@ -14,8 +14,9 @@ import {
 const styles = StyleSheet.create({
   panel: {
     borderWidth: 1,
-    backgroundColor: '#fff',
-    borderColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: '#1f1d1d',
+    borderColor: 'rgb(41, 41, 41)',
+    borderRadius: 2,
     // should be the same as parent container's padding (TelemetryTab's inner View)
     margin: 4,
     padding: 6,
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 11,
+    color: '#D8D9DA',
     textAlign: 'center',
   },
 });

@@ -16,19 +16,12 @@ import * as CounterActions from '../actions/counter';
 const styles = StyleSheet.create({
   tab: {
     padding: 4,
-    height: 600
+    height: 600,
+    backgroundColor: '#141414',
   },
-  panel: {
-    borderWidth: 1,
-    backgroundColor: '#fff',
-    borderColor: 'rgba(0,0,0,0.1)',
-    margin: 4,
-    //minHeight: 150,
-    padding: 10,
-    shadowColor: '#ccc',
-    shadowOffset: { width: 2, height: 2, },
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
+  header: {
+    fontSize: 11,
+    textAlign: 'center',
   },
 });
 
@@ -94,7 +87,6 @@ export default class TelemetryTab extends Component {
   render() {
     return (
       <ScrollView
-        style={{marginTop:-1}}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -105,29 +97,35 @@ export default class TelemetryTab extends Component {
       >
         <View style={styles.tab}>
           <View style={{flex:3, flexDirection:'row'}}>
-            <TelemetryPanel flex={1}>
-              <Text>Satellite Telemetry</Text>
+            <TelemetryPanel 
+              flex={1} 
+              header={'Satellite Telemetry'}>
             </TelemetryPanel>
-            <TelemetryPanel flex={2}>
-              <Text>Graphs</Text>
+            <TelemetryPanel 
+              flex={2}
+              header={'Graphs'}>
+            </TelemetryPanel>
+          </View>
+          <View style={{flex:3, flexDirection:'row'}}>
+            <TelemetryPanel 
+              flex={1}
+              header={'Payload Telemetry'}>
+            </TelemetryPanel>
+            <TelemetryPanel
+              flex={2}
+              header={'Satellite GPS'}>
             </TelemetryPanel>
           </View>
           <View style={{flex:2, flexDirection:'row'}}>
-            <TelemetryPanel flex={1}>
-              <Text>Payload Telemetry</Text>
-            </TelemetryPanel>
-            <TelemetryPanel flex={1}>
-              <Text>Satellite GPS</Text>
+            <TelemetryPanel 
+              flex={1} 
+              header={'Command Log'}>
             </TelemetryPanel>
           </View>
           <View style={{flex:2, flexDirection:'row'}}>
-            <TelemetryPanel flex={1}>
-              <Text>Command Log</Text>
-            </TelemetryPanel>
-          </View>
-          <View style={{flex:2, flexDirection:'row'}}>
-            <TelemetryPanel flex={1}>
-              <Text>Mission Information</Text>
+            <TelemetryPanel 
+              flex={1} 
+              header={'Mission Information'}>
             </TelemetryPanel>
           </View>
         </View>
