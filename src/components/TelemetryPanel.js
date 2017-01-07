@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 11,
+    fontWeight: 'bold',
     color: '#D8D9DA',
     textAlign: 'center',
   },
@@ -37,7 +38,7 @@ export default class TelemetryPanel extends Component {
     // how big this panel should flex to; same as style flex
     flex: React.PropTypes.number.isRequired,
     // panel name
-    header: React.PropTypes.string.isRequired,
+    header: React.PropTypes.string,
   };
 
   constructor(props) {

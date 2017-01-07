@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { 
   StyleSheet, 
+  ListView,
   ScrollView,
   View,
   Text,
   TouchableOpacity,
-  RefreshControl
+  RefreshControl,
+  Picker
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -16,12 +18,39 @@ import * as CounterActions from '../actions/counter';
 const styles = StyleSheet.create({
   tab: {
     padding: 4,
-    height: 600,
+    height: 620,
     backgroundColor: '#141414',
   },
-  header: {
-    fontSize: 11,
+  txt: {
+    fontSize: 9,
+    color: '#D8D9DA',
+  },
+  txtGood: {
+    fontSize: 9,
+    color: 'green',
+  },
+  txtWarning: {
+    fontSize: 9,
+    color: 'yellow',
+  },
+  txtBad: {
+    fontSize: 9,
+    color: 'red',
+  },
+  txtSmall: {
+    fontSize: 7,
     textAlign: 'center',
+    marginBottom: 5,
+    color: '#D8D9DA',
+    padding: 3,
+    paddingLeft: 4,
+    paddingRight: 4,
+    borderRadius: 2,
+    backgroundColor: "#292929",
+  },
+  txtLegend: {
+    fontSize: 7,
+    color: '#D8D9DA',
   },
 });
 
@@ -52,10 +81,14 @@ export default class TelemetryTab extends Component {
       console.log(e.code, e.reason);
     };
 
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
       ws,
       telemetry: undefined,
       refreshing: false,
+      dataSource: ds.cloneWithRows(['metrics 1', 'metrics 2']),
+	  timeSeriesType: 'none',
       counter: 0,
     };
     this.loadTelemetry = this.loadTelemetry.bind(this);
@@ -100,32 +133,125 @@ export default class TelemetryTab extends Component {
             <TelemetryPanel 
               flex={1} 
               header={'Satellite Telemetry'}>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Status</Text>
+                <Text style={styles.txtGood}>OK</Text>
+              </View>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Battery</Text>
+                <Text style={styles.txtGood}>OK</Text>
+              </View>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Radio</Text>
+                <Text style={styles.txtGood}>OK</Text>
+              </View>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>EPS</Text>
+                <Text style={styles.txtGood}>OK</Text>
+              </View>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Other</Text>
+                <Text style={styles.txtBad}>CRITICAL</Text>
+              </View>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Other2</Text>
+                <Text style={styles.txtWarning}>WARNING</Text>
+              </View>
             </TelemetryPanel>
             <TelemetryPanel 
-              flex={2}
-              header={'Graphs'}>
+              flex={1}
+              header={'Payload Telemetry'}>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Voltage</Text>
+                <Text style={styles.txtGood}>4.25</Text>
+                <Text style={styles.txt}>Vdc</Text>
+              </View>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Downlink</Text>
+                <Text style={styles.txtGood}>437.840</Text>
+                <Text style={styles.txt}>MHz</Text>
+              </View>
+              <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={styles.txt}>Uplink</Text>
+                <Text style={styles.txtGood}>145.890</Text>
+                <Text style={styles.txt}>MHz</Text>
+              </View>
+              <View style={{marginTop:10, alignItems:'center', justifyContent:'space-between'}}>
+                <Text style={[styles.txt, {fontSize:14}]}>LOS in</Text>
+                <Text style={[styles.txtGood, {fontSize:14}]}>00h:12m:25s</Text>
+              </View>
             </TelemetryPanel>
           </View>
           <View style={{flex:3, flexDirection:'row'}}>
             <TelemetryPanel 
-              flex={1}
-              header={'Payload Telemetry'}>
-            </TelemetryPanel>
-            <TelemetryPanel
               flex={2}
-              header={'Satellite GPS'}>
+              header={'Time Series'}>
+              <View style={{flex:1, flexDirection:'row'}}>
+                <View style={{flex: 1}}>
+                  <TouchableOpacity onPress={() => this.setState({timeSeriesType:'temp'})}>
+                    <Text style={styles.txtSmall}>Temp</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.setState({timeSeriesType:'power'})}>
+                    <Text style={styles.txtSmall}>Power</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.setState({timeSeriesType:'radio'})}>
+                    <Text style={styles.txtSmall}>RX/TX</Text>
+                  </TouchableOpacity>
+                </View>
+                <TelemetryPanel flex={4} style={{marginTop:0, marginBottom:0}}>
+                  <View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
+                    <View style={{flex:1, alignItems:'center'}}>
+                      <Text style={[styles.txtLegend, {fontSize:15}]}>{this.state.timeSeriesType} graphs here</Text>
+                    </View>
+                  </View>
+                </TelemetryPanel>
+                <View style={{flex:1}}>
+                  <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData) => <Text style={styles.txtLegend}>{rowData}</Text>}
+                  />
+                </View>
+              </View>
             </TelemetryPanel>
           </View>
           <View style={{flex:2, flexDirection:'row'}}>
             <TelemetryPanel 
               flex={1} 
               header={'Command Log'}>
+              <ScrollView>
+                <View>
+                  <Text style={[styles.txt, {fontSize: 7, fontFamily:'monospace'}]}>
+                    {"> 1 test\n> 2 test33\n> 3\n> 4\n> 5\n> 6\n> 7\n> 8"}
+                  </Text>
+                </View>
+              </ScrollView>
+            </TelemetryPanel>
+            <TelemetryPanel
+              flex={1}
+              header={'Satellite GPS'}>
+              <TelemetryPanel flex={1}>
+                  <View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
+                    <View style={{flex:1, alignItems:'center'}}>
+                      <Text style={[styles.txtLegend, {fontSize:15, textAlign:'center'}]}>render of sat loc here</Text>
+                    </View>
+                  </View>
+              </TelemetryPanel>
             </TelemetryPanel>
           </View>
           <View style={{flex:2, flexDirection:'row'}}>
             <TelemetryPanel 
               flex={1} 
               header={'Mission Information'}>
+
+              {/* TODO: picker/.item to be styled appropriately in native android/ios */}
+              <Picker
+                style={{color:'#D8D9DA'}}
+                mode='dropdown'
+                selectedValue={this.state.language}
+                onValueChange={(lang) => this.setState({language: lang})}>
+                <Picker.Item label="1" value="1" />
+                <Picker.Item label="2" value="2" />
+              </Picker>
             </TelemetryPanel>
           </View>
         </View>
