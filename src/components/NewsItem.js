@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
 });
 
 export default class NewsItem extends Component {
+  static shared = {
+  };
   static propTypes = {
   };
 
@@ -68,7 +70,8 @@ export default class NewsItem extends Component {
     this.state = {
       imageLoaded: false,
     }
-    Image.getSize('https://liquiddandruff.github.io/reveal.js/cubesat.jpg', (width, height) => {
+    // TODO: check if props.instagramModel exists
+    Image.getSize(this.getLargestInstagramImgUrl(props.instagramModel), (width, height) => {
       let scaledWidth = 360;
       const scaleFactor = width / scaledWidth;
       let scaledHeight = height / scaleFactor;
@@ -81,6 +84,10 @@ export default class NewsItem extends Component {
         imageHeightScaled: scaledHeight,
       };
     });
+  }
+
+  getLargestInstagramImgUrl(instagramModel) {
+      return 'https://www.instagram.com/p/' + instagramModel.code + '/media/?size=l'
   }
 
   render() {
@@ -96,7 +103,7 @@ export default class NewsItem extends Component {
     let largeDest = undefined;
     let instagramMedia = undefined;
     if(instagramModel) {
-      largeDest = 'https://www.instagram.com/p/' + instagramModel.code + '/media/?size=l'
+      largeDest = this.getLargestInstagramImgUrl(instagramModel);
       // if is video
       if(instagramModel.alt_media_url) {
         instagramMedia = (
