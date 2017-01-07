@@ -10,6 +10,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const CustomTabBar = React.createClass({
   tabIcons: [],
+  // dark.js customIdigo in RGB
+  iconR: 48,
+  iconG: 63,
+  iconB: 159,
 
   propTypes: {
     goToPage: React.PropTypes.func,
@@ -34,9 +38,9 @@ const CustomTabBar = React.createClass({
 
   //color between rgb(59,89,152) and rgb(204,204,204)
   iconColor(progress) {
-    const red = 40 + (204 - 40) * progress;
-    const green = 60 + (204 - 60) * progress;
-    const blue = 103 + (204 - 103) * progress;
+    const red = this.iconR + (204 - this.iconR) * progress;
+    const green = this.iconG + (204 - this.iconG) * progress;
+    const blue = this.iconB + (204 - this.iconB) * progress;
     return `rgb(${red}, ${green}, ${blue})`;
   },
 
@@ -47,7 +51,7 @@ const CustomTabBar = React.createClass({
       position: 'absolute',
       width: containerWidth / numberOfTabs,
       height: 3,
-      backgroundColor: 'rgb(40, 60, 103)',
+      backgroundColor: `rgb(${this.iconR},${this.iconG},${this.iconB})`,
       bottom: 0,
     };
 
