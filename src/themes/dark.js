@@ -3,6 +3,11 @@ import Color from 'color';
 import {Platform} from 'react-native';
 
 export default {
+    // Custom colors
+    tabBarBackgroundColor: '#292929',
+    backgroundColor: '#141414',
+    foregroundColor: '#1f1d1d',
+    txtColor: '#D8D9DA',
 
     // Badge
     badgeBg: '#ED1727',

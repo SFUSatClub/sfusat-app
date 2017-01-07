@@ -14,17 +14,15 @@ import {
 import { 
   Container, 
   Content, 
-  Card, 
   CardItem, 
   Thumbnail, 
   Icon,
   Button,
 } from 'native-base';
 
-
 import Video from 'react-native-video';
-
 import Immutable from 'immutable';
+
 import darkTheme from '../themes/dark';
 
 const styles = StyleSheet.create({
@@ -34,28 +32,13 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   card: {
-    borderWidth: 1,
-    backgroundColor: '#fff',
-    borderColor: 'rgba(0,0,0,0.1)',
-    minHeight: 150,
-    margin: 20,
-    marginBottom: 0,
-    shadowColor: '#ccc',
-    shadowOffset: { width: 2, height: 2, },
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-  },
-  newCard: {
     flex: 1,
     flexDirection: 'column',
     padding: 0,
-    marginBottom: 15,
   },
-  cardItemH: {
-    //borderBottomWidth: 0,
-  },
+  // native base bug
   cardItem: {
-    //borderBottomWidth: 0,
+    borderBottomWidth: 0,
   },
 });
 
@@ -127,7 +110,7 @@ export default class NewsItem extends Component {
 
     return (
       <View 
-        style={styles.newCard}
+        style={styles.card}
         onLayout={(event) => {
           const {x, y, width, height} = event.nativeEvent.layout;
           this.setState({cardWidth: width});
@@ -144,14 +127,14 @@ export default class NewsItem extends Component {
                 resizeMode='cover'
                 source={{uri:instagramModel.user.profile_picture}} />
               <View style={{justifyContent:'center'}}>
-                <Text style={{fontWeight:'bold', color:'black'}}>{instagramModel.user.username}</Text>
+                <Text style={{fontWeight:'bold', color:darkTheme.txtColor}}>{instagramModel.user.username}</Text>
                 {instagramModel.location &&
-                  <Text style={{color:'black'}}>{instagramModel.location.name}</Text>
+                  <Text style={{color:darkTheme.txtColor}}>{instagramModel.location.name}</Text>
                 }
               </View>
             </View>
             <View style={{justifyContent:'center'}}>
-              <Text style={{fontWeight:'bold', color:'black'}}>{"Instagram"}</Text>
+              <Text style={{fontWeight:'bold', color:darkTheme.txtColor}}>{"Instagram"}</Text>
             </View>
           </View>
             :
@@ -162,7 +145,7 @@ export default class NewsItem extends Component {
 
         {/* Text */}
         <View style={{padding: 20}}>
-          <Text style={{fontWeight:'normal', fontSize: 14, color:'black'}}>
+          <Text style={{fontWeight:'normal', fontSize: 14, color:darkTheme.txtColor}}>
             {instagramModel ? instagramModel.caption.text : this.props.content}
           </Text>
         </View>

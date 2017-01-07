@@ -12,6 +12,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import darkTheme from '../themes/dark';
 import TelemetryPanel from '../components/TelemetryPanel';
 import * as CounterActions from '../actions/counter';
 
@@ -19,11 +20,11 @@ const styles = StyleSheet.create({
   tab: {
     padding: 4,
     height: 620,
-    backgroundColor: '#141414',
+    backgroundColor: darkTheme.backgroundColor,
   },
   txt: {
     fontSize: 9,
-    color: '#D8D9DA',
+    color: darkTheme.txtColor,
   },
   txtGood: {
     fontSize: 9,
@@ -88,7 +89,7 @@ export default class TelemetryTab extends Component {
       telemetry: undefined,
       refreshing: false,
       dataSource: ds.cloneWithRows(['metrics 1', 'metrics 2']),
-	  timeSeriesType: 'none',
+	  timeSeriesType: 'temp',
       counter: 0,
     };
     this.loadTelemetry = this.loadTelemetry.bind(this);

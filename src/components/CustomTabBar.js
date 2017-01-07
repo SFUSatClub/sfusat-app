@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import darkTheme from '../themes/dark';
+
 const CustomTabBar = React.createClass({
   tabIcons: [],
   // dark.js customIdigo in RGB
@@ -41,6 +43,7 @@ const CustomTabBar = React.createClass({
     const red = this.iconR + (204 - this.iconR) * progress;
     const green = this.iconG + (204 - this.iconG) * progress;
     const blue = this.iconB + (204 - this.iconB) * progress;
+    //console.log( `rgb(${red}, ${green}, ${blue})`);
     return `rgb(${red}, ${green}, ${blue})`;
   },
 
@@ -52,6 +55,7 @@ const CustomTabBar = React.createClass({
       width: containerWidth / numberOfTabs,
       height: 3,
       backgroundColor: `rgb(${this.iconR},${this.iconG},${this.iconB})`,
+      //backgroundColor: darkTheme.customIndigo,
       bottom: 0,
     };
 
