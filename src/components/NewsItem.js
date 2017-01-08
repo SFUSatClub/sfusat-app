@@ -55,17 +55,18 @@ export default class NewsItem extends Component {
     }
     // TODO: check if props.instagramModel exists
     Image.getSize(this.getLargestInstagramImgUrl(props.instagramModel), (width, height) => {
+      // TODO: scale to width of container
       let scaledWidth = 360;
       const scaleFactor = width / scaledWidth;
       let scaledHeight = height / scaleFactor;
       //console.log(`dl_W: ${width} dl_H: ${height} sf: ${scaleFactor} sh: ${scaledHeight}`);
-      this.state = {
+      this.setState({
         imageLoaded: true,
         imageWidth: width,
         imageHeight: height,
         imageWidthScaled: scaledWidth,
         imageHeightScaled: scaledHeight,
-      };
+      });
     });
   }
 
