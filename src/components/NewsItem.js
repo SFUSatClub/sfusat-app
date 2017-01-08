@@ -135,7 +135,7 @@ export default class NewsItem extends Component {
 
         {/* Header */}
         {instagramModel ? 
-          <View style={{flexDirection:'row', justifyContent:'space-between', paddingLeft:10, paddingRight:10}}>
+          <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingLeft:10, paddingRight:10}}>
             <View style={{flexDirection:'row'}}>
               <Thumbnail
                 style={{marginRight:10}}
@@ -149,9 +149,10 @@ export default class NewsItem extends Component {
                 }
               </View>
             </View>
-            <TouchableOpacity style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}} onPress={() => {console.log('open in instagram')}}>
-              <Icon name='md-open' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:3}} />
-              <Text style={{fontWeight:'bold', color:darkTheme.txtColor}}>{"Instagram"}</Text>
+            <TouchableOpacity style={{justifyContent:'center'}} onPress={() => {console.log('open more dialog')}}>
+              <View style={{padding:5, paddingLeft:15, paddingRight:15, marginRight:5}}>
+                <Icon name='md-more' style={{fontSize:30, color:darkTheme.customIndigo}} />
+              </View>
             </TouchableOpacity>
           </View>
             :
@@ -160,7 +161,7 @@ export default class NewsItem extends Component {
           </View>
         }
 
-        {/* Text */}
+        {/* Body */}
         <View style={{padding:20, paddingTop:10, paddingBottom:10}}>
           <Text style={{fontSize: 9, color:darkTheme.txtColor}}>
             {this.state.formattedDate}
@@ -168,15 +169,25 @@ export default class NewsItem extends Component {
           <Text style={{fontWeight:'normal', fontSize: 14, color:darkTheme.txtColor}}>
             {instagramModel ? instagramModel.caption.text : this.props.content}
           </Text>
-          <View style={{flexDirection:'row', alignItems:'center', marginTop:10}}>
-            <TouchableOpacity style={{flexDirection:'row', marginRight:15}} onPress={() => {console.log('show likes')}}>
-              <Icon name='md-heart' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:3}} />
-              <Text style={{fontSize: 9, color:darkTheme.txtColor}}>{this.state.numLikes} Likes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{flexDirection:'row', marginRight:15}} onPress={() => {console.log('show comments')}}>
-              <Icon name='md-chatboxes' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:4}} />
-              <Text style={{fontSize: 9, color:darkTheme.txtColor}}>{this.state.numComments} Comments</Text>
-            </TouchableOpacity>
+
+          {/* Likes/Comments/Open-In-App */}
+          <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:10}}>
+            <View style={{flexDirection:'row'}}>
+              <TouchableOpacity style={{flexDirection:'row', marginRight:15}} onPress={() => {console.log('show likes')}}>
+                <Icon name='md-heart' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:3}} />
+                <Text style={{fontSize: 9, color:darkTheme.txtColor}}>{this.state.numLikes} Likes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{flexDirection:'row', marginRight:15}} onPress={() => {console.log('show comments')}}>
+                <Icon name='md-chatboxes' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:4}} />
+                <Text style={{fontSize: 9, color:darkTheme.txtColor}}>{this.state.numComments} Comments</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity style={{flexDirection:'row', marginRight:15}} onPress={() => {console.log('show comments')}}>
+                <Icon name='md-open' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:4}} />
+                <Text style={{fontSize: 9, color:darkTheme.txtColor}}>Instagram</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
