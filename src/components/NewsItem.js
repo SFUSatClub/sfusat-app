@@ -80,7 +80,7 @@ export default class NewsItem extends Component {
       imageLoadedStyle = {width: this.state.imageWidthScaled, height: this.state.imageHeightScaled};
     }
 
-    const { counter, toCounter, tabStyle, instagramModel } = this.props;
+    const { counter, toCounter, instagramModel } = this.props;
 
     // get the large version of each image so it crops and looks nicer
     let largeDest = undefined;
@@ -110,7 +110,7 @@ export default class NewsItem extends Component {
 
     return (
       <View 
-        style={styles.card}
+        style={[styles.card, this.props.style]}
         onLayout={(event) => {
           const {x, y, width, height} = event.nativeEvent.layout;
           this.setState({cardWidth: width});
@@ -119,7 +119,7 @@ export default class NewsItem extends Component {
 
         {/* Header */}
         {instagramModel ? 
-          <View style={{flexDirection:'row', justifyContent:'space-between', paddingLeft:10, paddingRight:10}}>
+          <View style={{flexDirection:'row', justifyContent:'space-between', paddingTop:10, paddingLeft:10, paddingRight:10}}>
             <View style={{flexDirection:'row'}}>
               <Thumbnail
                 style={{marginRight:10}}
@@ -144,7 +144,7 @@ export default class NewsItem extends Component {
         }
 
         {/* Text */}
-        <View style={{padding: 20}}>
+        <View style={{padding:20, paddingTop:10, paddingBottom:10}}>
           <Text style={{fontWeight:'normal', fontSize: 14, color:darkTheme.txtColor}}>
             {instagramModel ? instagramModel.caption.text : this.props.content}
           </Text>

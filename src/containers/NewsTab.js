@@ -33,6 +33,7 @@ export default class NewsTab extends Component {
     };
     this.loadInstagramFeed = this.loadInstagramFeed.bind(this);
     this._renderRow = this._renderRow.bind(this);
+    this._renderSeparator = this._renderSeparator.bind(this);
   }
 
   _onRefresh() {
@@ -83,13 +84,28 @@ export default class NewsTab extends Component {
   }
 
   _renderRow(rowData, sectionID, rowID, highlightRow) {
+    const newStyle = {};
     return (
       <NewsItem
         instagramModel={rowData} 
         counter={this.state.counter} 
         toCounter={this.toCounter}
-        tabStyle={this.props.tabStyle}
+        style={newStyle}
         key={rowData.code}
+      />
+    );
+  }
+
+  _renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={{
+          marginLeft: 10,
+          marginRight: 10,
+          height: adjacentRowHighlighted ? 4 : 1,
+          backgroundColor: darkTheme.foregroundColor,
+        }}
       />
     );
   }
@@ -103,6 +119,7 @@ export default class NewsTab extends Component {
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+        renderSeparator={this._renderSeparator}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -117,8 +134,7 @@ export default class NewsTab extends Component {
           content={ipsum}
           img={"img"}
           counter={this.state.counter} 
-          toCounter={this.toCounter}
-          tabStyle={this.props.tabStyle}/>
+          toCounter={this.toCounter}/>
 
       </ListView>
     );
