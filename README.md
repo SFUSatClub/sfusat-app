@@ -1,6 +1,6 @@
 # SFUSat Mobile App
 
-![demo](http://i.imgur.com/Bhcuj3x.gif)
+![preview](https://i.imgur.com/MVSw2JA.png)
 
 ## Included
 
