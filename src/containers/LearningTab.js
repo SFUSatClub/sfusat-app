@@ -1,8 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { 
+  StyleSheet, 
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Counter from '../components/Counter';
+
+import darkTheme from '../themes/dark';
+import TelemetryPanel from '../components/TelemetryPanel';
 import * as CounterActions from '../actions/counter';
 
 @connect(
@@ -14,10 +23,14 @@ import * as CounterActions from '../actions/counter';
 export default class LearningTab extends Component {
   render() {
     return (
-      <ScrollView style={this.props.tabStyle.tabView}>
-        <View style={this.props.tabStyle.card}>
-          <Text>Learning</Text>
-        </View>
+      <ScrollView
+        style={{backgroundColor:darkTheme.backgroundColor}}
+      >
+        <TelemetryPanel 
+          flex={1} 
+          header={"Learning"}
+          style={{margin:20, minHeight:150}}>
+        </TelemetryPanel>
       </ScrollView>
     );
   }
