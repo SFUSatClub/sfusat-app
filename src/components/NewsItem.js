@@ -149,9 +149,10 @@ export default class NewsItem extends Component {
                 }
               </View>
             </View>
-            <View style={{justifyContent:'center'}}>
+            <TouchableOpacity style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}} onPress={() => {console.log('open in instagram')}}>
+              <Icon name='md-open' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:3}} />
               <Text style={{fontWeight:'bold', color:darkTheme.txtColor}}>{"Instagram"}</Text>
-            </View>
+            </TouchableOpacity>
           </View>
             :
           <View style={{flexDirection:'row', }}>
@@ -168,10 +169,14 @@ export default class NewsItem extends Component {
             {instagramModel ? instagramModel.caption.text : this.props.content}
           </Text>
           <View style={{flexDirection:'row', alignItems:'center', marginTop:10}}>
-            <Icon name='md-heart' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:3}} />
-            <Text style={{fontSize: 9, color:darkTheme.txtColor, marginRight:15}}>{this.state.numLikes} Likes</Text>
-            <Icon name='md-chatboxes' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:4}} />
-            <Text style={{fontSize: 9, color:darkTheme.txtColor, marginRight:15}}>{this.state.numComments} Comments</Text>
+            <TouchableOpacity style={{flexDirection:'row', marginRight:15}} onPress={() => {console.log('show likes')}}>
+              <Icon name='md-heart' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:3}} />
+              <Text style={{fontSize: 9, color:darkTheme.txtColor}}>{this.state.numLikes} Likes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{flexDirection:'row', marginRight:15}} onPress={() => {console.log('show comments')}}>
+              <Icon name='md-chatboxes' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:4}} />
+              <Text style={{fontSize: 9, color:darkTheme.txtColor}}>{this.state.numComments} Comments</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
