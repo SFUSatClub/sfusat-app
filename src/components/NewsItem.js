@@ -24,6 +24,7 @@ import Video from 'react-native-video';
 import Immutable from 'immutable';
 
 import darkTheme from '../themes/dark';
+import Utils from '../utils';
 
 const styles = StyleSheet.create({
   text: {
@@ -35,23 +36,37 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     padding: 0,
-  },
-  // native base bug
-  cardItem: {
-    borderBottomWidth: 0,
+    marginTop: 30,
   },
 });
 
 export default class NewsItem extends Component {
   static shared = {
+    error_date: new Date()
   };
   static propTypes = {
   };
 
   constructor(props) {
     super(props);
+
+    let formattedDate = "";
+    let numLikes = 0;
+    let numComments = 0;
+    if(props.instagramModel) {
+      let utcMS = parseInt(props.instagramModel.created_time) * 1000;
+      formattedDate = Utils.formattedDateFromUTC(utcMS);
+      numLikes = props.instagramModel.likes.count;
+      numComments = props.instagramModel.comments.count;
+    } else {
+      formattedDate = Utils.formattedDateFromUTC(NewsItem.shared.error_date);
+    }
+
     this.state = {
       imageLoaded: false,
+      numLikes,
+      numComments,
+      formattedDate,
     }
     // TODO: check if props.instagramModel exists
     Image.getSize(this.getLargestInstagramImgUrl(props.instagramModel), (width, height) => {
@@ -120,7 +135,7 @@ export default class NewsItem extends Component {
 
         {/* Header */}
         {instagramModel ? 
-          <View style={{flexDirection:'row', justifyContent:'space-between', paddingTop:10, paddingLeft:10, paddingRight:10}}>
+          <View style={{flexDirection:'row', justifyContent:'space-between', paddingLeft:10, paddingRight:10}}>
             <View style={{flexDirection:'row'}}>
               <Thumbnail
                 style={{marginRight:10}}
@@ -146,9 +161,18 @@ export default class NewsItem extends Component {
 
         {/* Text */}
         <View style={{padding:20, paddingTop:10, paddingBottom:10}}>
+          <Text style={{fontSize: 9, color:darkTheme.txtColor}}>
+            {this.state.formattedDate}
+          </Text>
           <Text style={{fontWeight:'normal', fontSize: 14, color:darkTheme.txtColor}}>
             {instagramModel ? instagramModel.caption.text : this.props.content}
           </Text>
+          <View style={{flexDirection:'row', alignItems:'center', marginTop:10}}>
+            <Icon name='md-heart' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:3}} />
+            <Text style={{fontSize: 9, color:darkTheme.txtColor, marginRight:15}}>{this.state.numLikes} Likes</Text>
+            <Icon name='md-chatboxes' style={{fontSize:14, color : darkTheme.customIndigo, marginRight:4}} />
+            <Text style={{fontSize: 9, color:darkTheme.txtColor, marginRight:15}}>{this.state.numComments} Comments</Text>
+          </View>
         </View>
 
         {/* Img */}
@@ -163,18 +187,6 @@ export default class NewsItem extends Component {
               source={{uri:'https://liquiddandruff.github.io/reveal.js/cubesat.jpg'}} />
           }
         </View>
-
-        <CardItem style={[styles.cardItem, {flexDirection: 'row', justifyContent: 'space-around'}]}>
-          <View>
-            <Icon name='md-heart' style={{color : darkTheme.customIndigo}} />
-          </View>
-          <View>
-            <Icon name='md-chatboxes' style={{color : darkTheme.customIndigo}} />
-          </View>
-          <View>
-            <Icon name='md-share-alt' style={{color : darkTheme.customIndigo}} />
-          </View>
-        </CardItem>
 
       </View>
     );

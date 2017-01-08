@@ -84,7 +84,8 @@ export default class NewsTab extends Component {
   }
 
   _renderRow(rowData, sectionID, rowID, highlightRow) {
-    const newStyle = {};
+    // set a margin of 10 only for the first NewsItem; looks better this way
+    const newStyle = rowID == 0 ? {marginTop:10} : {};
     return (
       <NewsItem
         instagramModel={rowData} 
@@ -119,7 +120,6 @@ export default class NewsTab extends Component {
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        renderSeparator={this._renderSeparator}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
