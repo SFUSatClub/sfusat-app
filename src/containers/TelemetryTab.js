@@ -18,7 +18,7 @@ import * as CounterActions from '../actions/counter';
 
 const styles = StyleSheet.create({
   tab: {
-    padding: 4,
+    padding: 5,
     height: 620,
     backgroundColor: darkTheme.backgroundColor,
   },
@@ -138,6 +138,10 @@ export default class TelemetryTab extends Component {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
   }
 
   render() {
