@@ -65,6 +65,27 @@ export default class TelemetryTab extends Component {
   constructor(props) {
     super(props);
 
+
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+    this.state = {
+      ws: undefined,
+      telemetry: undefined,
+      refreshing: false,
+      dataSource: ds.cloneWithRows(['metrics 1', 'metrics 2']),
+      timeSeriesType: 'temp',
+      counter: 0,
+    };
+
+    this.setupWebsocket = this.setupWebsocket.bind(this);
+    this.loadTelemetry = this.loadTelemetry.bind(this);
+  }
+
+  componentWillMount() {
+    this.setupWebsocket();
+  }
+
+  setupWebsocket() {
     let ws = new WebSocket('ws://echo.websocket.org');
     ws.onopen = () => {
       ws.send('ws onopen');
@@ -82,17 +103,9 @@ export default class TelemetryTab extends Component {
       console.log(e.code, e.reason);
     };
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
-    this.state = {
-      ws,
-      telemetry: undefined,
-      refreshing: false,
-      dataSource: ds.cloneWithRows(['metrics 1', 'metrics 2']),
-	  timeSeriesType: 'temp',
-      counter: 0,
-    };
-    this.loadTelemetry = this.loadTelemetry.bind(this);
+    this.setState({
+      ws
+    });
   }
 
   _onRefresh() {
@@ -110,7 +123,16 @@ export default class TelemetryTab extends Component {
           telemetry: responseJson,
           refreshing: false,
         });
-        this.state.ws.send("hey");
+        
+        // 0: connection has not yet been established.
+        // 1: connection is established and communication is possible.
+        // 2: connection is going through the closing handshake.
+        // 3: connection has been closed or could not be opened.
+        console.log(`ws.readyState: ${this.state.ws.readyState}`);
+        if(this.state.ws.readyState === 1) {
+          this.state.ws.send("hey");
+        }
+
         return responseJson;
       })
       .catch((error) => {
