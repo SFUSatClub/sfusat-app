@@ -55,7 +55,7 @@ export default class Home extends Component {
   render() {
     return (
       <ScrollableTabView
-        initialPage={0}
+        initialPage={1}
         renderTabBar={() => <CustomTabBar underlineStyle={{height:3}}/>}
       >
         <NewsTab tabLabel="ios-paper" tabStyle={styles} navigate={this.props.navigate}/>

@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 
 import darkTheme from '../themes/dark';
 import TelemetryPanel from '../components/TelemetryPanel';
+import Sparkline from '../components/Sparkline';
 import * as CounterActions from '../actions/counter';
 
 const styles = StyleSheet.create({
@@ -207,6 +208,7 @@ export default class TelemetryTab extends Component {
                 <Text style={[styles.txt, {fontSize:14}]}>LOS in</Text>
                 <Text style={[styles.txtGood, {fontSize:14}]}>00h:12m:25s</Text>
               </View>
+              <Sparkline data={[1,10,5,2,7,1,10]}/>
             </TelemetryPanel>
           </View>
           <View style={{flex:3, flexDirection:'row'}}>

@@ -12,6 +12,9 @@
     "postinstall": "npm run link"
   },
   "dependencies": {
+    "art": "^0.10.1",
+    "d3": "^4.4.1",
+    "d3-shape": "^1.0.4",
     "immutable": "^3.7.6",
     "lodash": "^4.16.6",
     "native-base": "^0.5.20",

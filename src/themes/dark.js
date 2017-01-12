@@ -4,6 +4,7 @@ import {Platform} from 'react-native';
 
 export default {
     // Custom colors
+    customIndigo: '#303F9F',
     tabBarBackgroundColor: '#292929',
     backgroundColor: '#141414',
     foregroundColor: '#1f1d1d',
@@ -110,7 +111,6 @@ export default {
     // Footer
     footerHeight: 55,
     footerDefaultBg: (Platform.OS === 'ios' ) ? '#F8F8F8' : '#303F9F',
-    customIndigo: '#303F9F',
 
 
     //FooterTab
