@@ -3,7 +3,7 @@ import {
   StyleSheet,
   ListView,
   View, 
-  RecyclerViewBackedScrollView,
+  ScrollView,
   Text, 
   TouchableOpacity, 
   RefreshControl
@@ -119,7 +119,7 @@ export default class NewsTab extends Component {
         initialListSize={1}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+        renderScrollComponent={props => <ScrollView {...props} />}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

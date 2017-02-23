@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import darkTheme from '../themes/dark';
 import TelemetryPanel from '../components/TelemetryPanel';
 import * as CounterActions from '../actions/counter';
+import PubNub from 'pubnub';
 
 const styles = StyleSheet.create({
   tab: {
